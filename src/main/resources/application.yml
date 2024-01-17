@@ -1,0 +1,12 @@
+configuration:
+  swagger:
+    app: 'EvoltChatApp'
+    description: 'Chat Application for Evolt'
+    developer: 'Tijana Burazorovic'
+    email: 'tijana.burazorovic@stu.ibu.edu.ba'
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://tijanaburazorovic:ChatAppDB@cluster0.UfpkV0UvaInkF34j.mongodb.net/?retryWrites=true&w=majority
+      database: cluster0
