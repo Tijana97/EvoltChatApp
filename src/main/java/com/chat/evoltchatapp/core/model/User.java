@@ -1,6 +1,9 @@
 package com.chat.evoltchatapp.core.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,10 +18,14 @@ public class User implements UserDetails {
     @Id
     private String id;
 
+    @NotBlank
+    @Email
+    @Indexed(unique = true)
     private String email;
 
     private String username;
 
+    @NotBlank
     private String password;
 
     private String role = "user";

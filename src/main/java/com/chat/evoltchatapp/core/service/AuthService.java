@@ -31,6 +31,10 @@ public class AuthService {
     }
 
     public UserDTO signUp(RegisterRequestDTO registerRequestDTO) {
+        Optional<User> user = userRepository.findFirstByEmail(registerRequestDTO.getEmail());
+        if(user.isPresent() || registerRequestDTO.getEmail().isEmpty() || registerRequestDTO.getPassword().isEmpty()){
+            throw new RuntimeException("User already exists");
+        }
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         userRequestDTO.setEmail(registerRequestDTO.getEmail());
 
