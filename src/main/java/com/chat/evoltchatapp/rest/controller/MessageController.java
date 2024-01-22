@@ -2,22 +2,25 @@ package com.chat.evoltchatapp.rest.controller;
 
 import com.chat.evoltchatapp.core.model.Message;
 import com.chat.evoltchatapp.core.service.MessageService;
+import com.chat.evoltchatapp.rest.dto.MessageDTO;
+import com.chat.evoltchatapp.rest.websockets.MainSocketHandler;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/messages")
+@CrossOrigin(origins = "http://localhost:3000", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS })
 public class MessageController {
 
     private final MessageService messageService;
+    private  final MainSocketHandler mainSocketHandler;
 
-    public MessageController(MessageService messageService){
+    public MessageController(MessageService messageService, MainSocketHandler mainSocketHandler){
         this.messageService = messageService;
+        this.mainSocketHandler = mainSocketHandler;
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/")
@@ -26,8 +29,13 @@ public class MessageController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/new")
-    public ResponseEntity<Message> addMessage(@RequestBody Message message){
-        return  ResponseEntity.ok(messageService.addMessage(message));
+    public ResponseEntity<Message> addMessage(@RequestBody MessageDTO message) throws IOException {
+        System.out.println(message.getMessage());
+        System.out.println(message.getUsername());
+        Message newMessage = messageService.addMessage(message);
+        mainSocketHandler.BroadcastNewMessage();
+
+        return  ResponseEntity.ok(newMessage);
     }
 
 

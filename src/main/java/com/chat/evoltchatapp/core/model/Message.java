@@ -3,7 +3,7 @@ package com.chat.evoltchatapp.core.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Document
 public class Message {
@@ -12,7 +12,7 @@ public class Message {
 
     private String username;
 
-    private Timestamp timestamp;
+    private Date date;
 
     private String content;
 
@@ -32,12 +32,12 @@ public class Message {
         this.username = username;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getContent() {

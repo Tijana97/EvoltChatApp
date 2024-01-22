@@ -8,5 +8,13 @@ configuration:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://tijanaburazorovic:ChatAppDB@cluster0.UfpkV0UvaInkF34j.mongodb.net/?retryWrites=true&w=majority
+      uri: mongodb+srv://tijanaburazorovic:UfpkV0UvaInkF34j@cluster0.9xsfnsz.mongodb.net/?retryWrites=true&w=majority
       database: cluster0
+
+security:
+  jwt:
+    secret: 'EvoltTest123hfkdkslsnjf12hdv5d25dgfjzrw46hd56dbvnd546d'
+
+management:
+  security:
+    enabled: false
